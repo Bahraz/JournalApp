@@ -1,0 +1,38 @@
+{
+  "entries" : [
+
+  ],
+  "subjects" : [
+    "Matematyka",
+    "Polski"
+  ],
+  "users" : [
+    {
+      "role" : "admin",
+      "firstName" : "Główny",
+      "lastName" : "Administrator",
+      "passwordHash" : "YWRtaW4xMjM=",
+      "id" : "675EC3B3-7238-4681-94B4-8947FD104E0E",
+      "username" : "admin"
+    },
+    {
+      "role" : "teacher",
+      "firstName" : "Janusz",
+      "lastName" : "Kowalski",
+      "passwordHash" : "dGVzdA==",
+      "id" : "21311F05-9F63-465D-AB94-684940E2901B",
+      "username" : "teacher"
+    },
+    {
+      "role" : "student",
+      "firstName" : "Kamil",
+      "lastName" : "Kowalski",
+      "passwordHash" : "dGVzdA==",
+      "id" : "EAA1F98A-17EE-4A5A-BE8F-4AA7AF8D245B",
+      "username" : "student"
+    }
+  ],
+  "grades" : [
+
+  ]
+}
