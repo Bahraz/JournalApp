@@ -3,7 +3,7 @@ import Foundation
 // Grade model
 struct Grade: Codable {
     let id: UUID
-    let value: Double
+    var value: Int
     let studentID: UUID
     let teacherID: UUID
     let subjectID: UUID

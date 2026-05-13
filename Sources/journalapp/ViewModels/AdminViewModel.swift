@@ -10,7 +10,7 @@ class AdminViewModel {
         self.storage = storage
         self.view = view
     }
-    
+
     func manageUsersFlow() {
         var back = false
         while !back {
@@ -18,7 +18,9 @@ class AdminViewModel {
             let choice = readLine() ?? ""
             switch choice {
             case "1": addNewUser()
-            case "2": showUsers()
+            case "2": 
+                showUsers()
+                view.waitForEnter()
             case "3": editUser()
             case "4": resetUserPassword()
             case "5": deleteUser()
@@ -35,7 +37,9 @@ class AdminViewModel {
             let choice = readLine() ?? ""
             switch choice {
             case "1": addNewSubject()
-            case "2": showSubjects()
+            case "2": 
+                showSubjects()
+                view.waitForEnter()
             case "3": editSubject()
             case "4": deleteSubject()
             case "0": back = true
@@ -78,12 +82,11 @@ class AdminViewModel {
                 print("\($0). [\($1.role.rawValue.uppercased())] \($1.firstName) \($1.lastName) (@\($1.username))") 
             }
         }
-        view.waitForEnter()
     }
 
     private func editUser() {
         print("\n--- EDYCJA UŻYTKOWNIKA ---")
-        database.users.enumerated().forEach { print("\($0). \($1.firstName) \($1.lastName) (@\($1.username))") }
+        showUsers()
         
         let idxStr = view.getInput(prompt: "Numer indeksu do edycji: ")
         if let idx = Int(idxStr), idx >= 0 && idx < database.users.count {
@@ -122,7 +125,7 @@ class AdminViewModel {
 
     private func resetUserPassword() {
         print("\n--- RESETOWANIE HASŁA ---")
-        database.users.enumerated().forEach { print("\($0). \($1.firstName) \($1.lastName)") }
+        showUsers()
         
         let idxStr = view.getInput(prompt: "Podaj indeks użytkownika: ")
         if let idx = Int(idxStr), idx >= 0 && idx < database.users.count {
@@ -139,13 +142,29 @@ class AdminViewModel {
 
     private func deleteUser() {
         print("\n--- USUWANIE UŻYTKOWNIKA ---")
-        database.users.enumerated().forEach { print("\($0). \($1.username)") }
+        if database.users.isEmpty {
+            print("Brak użytkowników do usunięcia.")
+            view.waitForEnter()
+            return
+        }
         
-        let idxStr = view.getInput(prompt: "Indeks do usunięcia: ")
+        showUsers()
+        
+        let idxStr = view.getInput(prompt: "Podaj indeks użytkownika do usunięcia (lub Enter, aby anulować): ")
+        
         if let idx = Int(idxStr), idx >= 0 && idx < database.users.count {
-            let deletedName = database.users[idx].username
-            database.users.remove(at: idx)
-            saveAndInfo("Usunięto użytkownika: \(deletedName).")
+            let userToDelete = database.users[idx]
+            
+            let confirm = view.getInput(prompt: "Czy na pewno chcesz usunąć użytkownika \(userToDelete.firstName) \(userToDelete.lastName) (@\(userToDelete.username))? (t/n): ")
+            
+            if confirm.lowercased() == "t" {
+                let deletedName = userToDelete.username
+                database.users.remove(at: idx)
+                saveAndInfo("Usunięto użytkownika: \(deletedName).")
+            } else {
+                print("Anulowano operację usuwania.")
+                view.waitForEnter()
+            }
         } else {
             print("Nieprawidłowy indeks.")
             view.waitForEnter()
@@ -155,7 +174,7 @@ class AdminViewModel {
     private func addNewSubject() {
         let name = view.getInput(prompt: "Nazwa przedmiotu: ")
         if !name.isEmpty {
-            database.subjects.append(name)
+            database.subjects.append(Subject(id: UUID(), name: name))
             saveAndInfo("Dodano przedmiot: \(name).")
         } else {
             print("Nazwa nie może być pusta.")
@@ -168,20 +187,24 @@ class AdminViewModel {
         if database.subjects.isEmpty {
             print("Brak przedmiotów w bazie.")
         } else {
-            database.subjects.enumerated().forEach { print("\($0). \($1)") }
+            database.subjects.enumerated().forEach { print("\($0). \($1.name)") }
         }
-        view.waitForEnter()
     }
 
     private func editSubject() {
-        showSubjects()
+        print("\n--- EDYCJA PRZEDMIOTU ---")
+        showSubjects() 
+        
         let idxStr = view.getInput(prompt: "Numer indeksu do edycji: ")
         if let idx = Int(idxStr), idx >= 0 && idx < database.subjects.count {
-            let newName = view.getInput(prompt: "Nowa nazwa przedmiotu: ")
-            if !newName.isEmpty {
-                database.subjects[idx] = newName
-                saveAndInfo("Przedmiot zaktualizowany.")
-            }
+            let oldSubject = database.subjects[idx]
+            
+            let newName = view.getInput(prompt: "Nowa nazwa przedmiotu (Enter - bez zmian): ")
+            
+            let finalName = newName.isEmpty ? oldSubject.name : newName
+            
+            database.subjects[idx] = Subject(id: oldSubject.id, name: finalName)
+            saveAndInfo("Przedmiot zaktualizowany.")
         } else {
             print("Nieprawidłowy indeks.")
             view.waitForEnter()
@@ -189,11 +212,23 @@ class AdminViewModel {
     }
 
     private func deleteSubject() {
+        print("\n--- USUWANIE PRZEDMIOTU ---")
         showSubjects()
-        let idxStr = view.getInput(prompt: "Indeks przedmiotu do usunięcia: ")
+        
+        let idxStr = view.getInput(prompt: "Indeks przedmiotu do usunięcia (lub Enter, aby anulować): ")
+        
         if let idx = Int(idxStr), idx >= 0 && idx < database.subjects.count {
-            database.subjects.remove(at: idx)
-            saveAndInfo("Usunięto przedmiot.")
+            let subjectName = database.subjects[idx].name
+            
+            let confirm = view.getInput(prompt: "Czy na pewno chcesz usunąć przedmiot '\(subjectName)'? (t/n): ")
+            
+            if confirm.lowercased() == "t" {
+                database.subjects.remove(at: idx)
+                saveAndInfo("Przedmiot '\(subjectName)' został usunięty.")
+            } else {
+                print("Anulowano usuwanie.")
+                view.waitForEnter()
+            }
         } else {
             print("Nieprawidłowy indeks.")
             view.waitForEnter()

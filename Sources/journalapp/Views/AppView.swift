@@ -13,12 +13,18 @@ class AppView {
         clearScreen()
         print("=== E-DZIENNIK | \(user.username) [\(user.role.rawValue.uppercased())] ===")
         print("---------------------------------------------------------")
+        
         if user.role == .admin {
             print("1. Zarządzanie Użytkownikami")
             print("2. Zarządzanie Przedmiotami")
         } else if user.role == .teacher {
-            print("1. Wystawianie ocen")
+            print("1. Zarządzanie Ocenami")
+            print("2. Zarządzanie Uwagami")
+            print("3. Przegląd raportów uczniów")
+        } else if user.role == .student {
+            print("1. Moje Oceny i Uwagi")
         }
+        
         print("0. Wyloguj")
         print("---------------------------------------------------------")
         print("Wybierz sekcję: ", terminator: "")
@@ -46,6 +52,25 @@ class AppView {
         print("4. Usuń przedmiot")
         print("0. Powrót")
         print("---------------------------------")
+        print("Wybierz opcję: ", terminator: "")
+    }
+
+    func showTeacherGradeMenu() {
+        clearScreen()
+        print("=== ZARZĄDZANIE OCENAMI ===")
+        print("1. Wystaw nową ocenę")
+        print("2. Edytuj istniejącą ocenę")
+        print("0. Powrót")
+        print("---------------------------")
+        print("Wybierz opcję: ", terminator: "")
+    }
+
+    func showTeacherEntryMenu() {
+        clearScreen()
+        print("=== ZARZĄDZANIE UWAGAMI ===")
+        print("1. Dodaj nową uwagę (wpis)")
+        print("0. Powrót")
+        print("---------------------------")
         print("Wybierz opcję: ", terminator: "")
     }
 

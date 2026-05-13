@@ -1,38 +1,77 @@
 {
   "entries" : [
-
-  ],
-  "subjects" : [
-    "Matematyka",
-    "Polski"
+    {
+      "date" : 800366977.771347,
+      "id" : "771B9EC1-E555-43A5-A59F-CE3FF77E8173",
+      "studentID" : "EA91FDBE-C112-4C16-93A1-19B49BFFC473",
+      "teacherID" : "674ED452-982B-4CAA-9D71-4D8BB919100A",
+      "text" : "Rozmawianie na lekcji, rzucanie przedmiotami."
+    }
   ],
   "users" : [
     {
-      "role" : "admin",
       "firstName" : "Główny",
       "lastName" : "Administrator",
+      "id" : "F2C9CD30-6572-4F6C-9773-C5B0BF129AB1",
+      "role" : "admin",
       "passwordHash" : "YWRtaW4xMjM=",
-      "id" : "675EC3B3-7238-4681-94B4-8947FD104E0E",
       "username" : "admin"
     },
     {
-      "role" : "teacher",
-      "firstName" : "Janusz",
+      "firstName" : "Jan",
       "lastName" : "Kowalski",
+      "id" : "674ED452-982B-4CAA-9D71-4D8BB919100A",
+      "role" : "teacher",
       "passwordHash" : "dGVzdA==",
-      "id" : "21311F05-9F63-465D-AB94-684940E2901B",
       "username" : "teacher"
     },
     {
-      "role" : "student",
       "firstName" : "Kamil",
       "lastName" : "Kowalski",
+      "id" : "EA91FDBE-C112-4C16-93A1-19B49BFFC473",
+      "role" : "student",
       "passwordHash" : "dGVzdA==",
-      "id" : "EAA1F98A-17EE-4A5A-BE8F-4AA7AF8D245B",
-      "username" : "student"
+      "username" : "student1"
+    },
+    {
+      "firstName" : "user",
+      "lastName" : "testowy",
+      "id" : "AC2D1C04-5999-493D-864F-4CC3233A0F2E",
+      "role" : "student",
+      "passwordHash" : "dGVzdA==",
+      "username" : "testuser"
     }
   ],
   "grades" : [
-
+    {
+      "value" : 6,
+      "date" : 800366813.8034229,
+      "id" : "EB21A708-8F18-4066-AA08-8DB02052611C",
+      "studentID" : "EA91FDBE-C112-4C16-93A1-19B49BFFC473",
+      "teacherID" : "674ED452-982B-4CAA-9D71-4D8BB919100A",
+      "subjectID" : "CB4722D0-15AC-433C-B9AB-42EE51961DDD"
+    },
+    {
+      "value" : 5,
+      "date" : 800366825.067276,
+      "id" : "FF342828-08BB-4E94-80DF-6B7139F395EF",
+      "studentID" : "AC2D1C04-5999-493D-864F-4CC3233A0F2E",
+      "teacherID" : "674ED452-982B-4CAA-9D71-4D8BB919100A",
+      "subjectID" : "CB4722D0-15AC-433C-B9AB-42EE51961DDD"
+    }
+  ],
+  "subjects" : [
+    {
+      "id" : "56A59EDC-75DE-4A0A-81A5-09B2575D1DD7",
+      "name" : "Matematyka"
+    },
+    {
+      "id" : "CB4722D0-15AC-433C-B9AB-42EE51961DDD",
+      "name" : "Polski"
+    },
+    {
+      "id" : "858198F4-D9CF-438E-BF4E-13CFDF93FEC7",
+      "name" : "Niemiecki"
+    }
   ]
 }
