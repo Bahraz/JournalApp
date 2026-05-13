@@ -1,9 +1,8 @@
 import Foundation
 
-// Upewnij się, że używasz 'final class', aby ViewModele widziały te same zmiany
 final class Database: Codable {
     var users: [User]
-    var subjects: [Subject]  // <-- TUTAJ MUSI BYĆ [Subject], a nie [String]
+    var subjects: [Subject]
     var grades: [Grade]
     var entries: [Entry]
 

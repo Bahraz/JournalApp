@@ -1,6 +1,5 @@
 import Foundation
 
-// Grade model
 struct Grade: Codable {
     let id: UUID
     var value: Int

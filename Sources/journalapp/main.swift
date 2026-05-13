@@ -35,7 +35,6 @@ while !shouldExitApp {
                 teacherID: user.id
             )
             
-            // Poprawione literówki i dostęp do metod
             if choice == "1" { 
                 teacherVM.manageGradesFlow()
             } else if choice == "2" {

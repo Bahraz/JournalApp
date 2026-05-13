@@ -1,6 +1,5 @@
 import Foundation
 
-// Entry model
 struct Entry: Codable {
     let id: UUID
     let date: Date
