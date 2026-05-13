@@ -45,15 +45,19 @@ while !shouldExitApp {
                 authService.logout() 
             }
             
-        case .student:
-            if choice == "0" { 
+            case .student:
+            let studentVM = StudentViewModel(
+                database: database,
+                view: appView,
+                studentID: user.id
+            )
+            
+            if choice == "1" { 
+                studentVM.manageStudentFlow()
+            } else if choice == "0" { 
                 authService.logout() 
-            } else { 
-                print("\n[i] Moduł ucznia (przegląd ocen) zostanie zaimplementowany w przyszłości.") 
-                appView.waitForEnter() 
             }
         }
-        
     } else {
         appView.clearScreen()
         _ = loginVM.startLoginProcess()

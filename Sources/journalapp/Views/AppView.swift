@@ -74,6 +74,16 @@ class AppView {
         print("Wybierz opcję: ", terminator: "")
     }
 
+    func showStudentMenu() {
+        clearScreen()
+        print("=== PANEL UCZNIA ===")
+        print("1. Wyświetl moje oceny i średnią")
+        print("2. Wyświetl uwagi i wpisy")
+        print("0. Powrót")
+        print("--------------------")
+        print("Wybierz opcję: ", terminator: "")
+    }
+
     func getInput(prompt: String) -> String {
         print(prompt, terminator: "")
         return readLine() ?? ""
